@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<section class="section-hero overlay inner-page bg-image"
+  style="background-image: url('{% static 'images/about_hero.jpg' %}');" id="home-section">
+  <div class="container">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-12 text-center">
+        <div class="mb-5">
+          <h1 class="text-white font-weight-bold">Contact</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row mb-5 justify-content-center">
+      <div class="col-md-7 text-center">
+        <h2 class="section-title mb-2">Contact Us</h2>
+        <p>Have questions or need support? Feel free to reach out to us!</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <!-- Formulaire Django -->
+        <form action="{% url 'jobapp:contact' %}" method="post">
+          {% csrf_token %}
+          
+          <!-- Bloc des messages -->
+          {% if messages %}
+            <div class="messages">
+              {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">
+                      {{ message }}
+                  </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+      
+          
+          <!-- Formulaire Django -->
+          {{ form.as_p }}
+          
+          <!-- Bouton d'envoi -->
+          <button type="submit" class="btn btn-success">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
